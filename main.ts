@@ -1,3 +1,8 @@
+enum ActionKind {
+    Walking,
+    Idle,
+    Jumping
+}
 namespace SpriteKind {
     export const Coin = SpriteKind.create()
 }
@@ -22,6 +27,7 @@ let Marcus: Sprite = null
 scene.setBackgroundColor(9)
 Marcus = sprites.create(img`
     . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
     . . . . . f f f f f f . . . . . 
     . . . . f c c c c c c f . . . . 
     . . . . f c c c c c c f . . . . 
@@ -36,12 +42,9 @@ Marcus = sprites.create(img`
     . . 1 1 1 1 9 c c 3 3 f . . . . 
     . . . f 9 9 9 f f 3 3 f . . . . 
     . . . f 9 9 f . f 3 3 f . . . . 
-    . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(Marcus, 100, 0)
 tiles.setCurrentTilemap(tilemap`level1`)
-Marcus.ay = 350
-scene.cameraFollowSprite(Marcus)
 for (let value of tiles.getTilesByType(assets.tile`myTile1`)) {
     coin = sprites.create(img`
         . . . b b b b b b . . . 
@@ -144,3 +147,50 @@ for (let value of tiles.getTilesByType(assets.tile`myTile1`)) {
     tiles.placeOnTile(coin, value)
     tiles.setTileAt(value, assets.tile`transparency16`)
 }
+Marcus.ay = 350
+scene.cameraFollowSprite(Marcus)
+forever(function () {
+    if (characterAnimations.matchesRule(Marcus, characterAnimations.rule(Predicate.Moving))) {
+        characterAnimations.loopFrames(
+        Marcus,
+        assets.animation`Marcus-Idle`,
+        150,
+        characterAnimations.rule(Predicate.NotMoving, Predicate.FacingRight)
+        )
+        characterAnimations.loopFrames(
+        Marcus,
+        assets.animation`Marcus-Idle0`,
+        150,
+        characterAnimations.rule(Predicate.NotMoving, Predicate.FacingLeft)
+        )
+        characterAnimations.loopFrames(
+        Marcus,
+        assets.animation`Marcus-Walk`,
+        100,
+        characterAnimations.rule(Predicate.MovingRight)
+        )
+        characterAnimations.loopFrames(
+        Marcus,
+        assets.animation`Marcus-Walk0`,
+        100,
+        characterAnimations.rule(Predicate.MovingLeft)
+        )
+    }
+})
+forever(function () {
+    if (Marcus.isHittingTile(CollisionDirection.Left) || Marcus.isHittingTile(CollisionDirection.Right)) {
+        if (controller.A.isPressed()) {
+            Marcus.vy = -160
+        }
+    }
+})
+forever(function () {
+    if (Marcus.vy < -1) {
+        animation.runImageAnimation(
+        Marcus,
+        assets.animation`Marcus-Fall`,
+        100,
+        false
+        )
+    }
+})
