@@ -379,6 +379,42 @@ namespace myImages {
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
 `];
+            case "Marcus-Fall0":
+            case "anim5":return [img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . f f f f f f . . . . . 
+. . . . f c c c c c c f . . . . 
+. . . . f c c c c c c f . . . . 
+. . . . f c 1 c 1 c c f . . . . 
+. . . . f c 1 c 1 c c f . . . . 
+. . . f f c c c c c c f f f . . 
+. . f 2 f c c c c c c f 8 8 f . 
+. . f 2 2 2 c c c c c 8 8 8 f . 
+. . . f 2 2 c c c c c 8 8 f . . 
+. . . . f c c c c 1 1 f f . . . 
+. . . . f 3 3 c c 9 1 1 1 . . . 
+. . . . f 3 3 f f 9 9 9 f . . . 
+. . . . . . . . . f 9 9 f . . . 
+. . . . . . . . . . . . . . . . 
+`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . f f f f f f . . . . . 
+. . . . f c c c c c c f . . . . 
+. . . . f c c c c c c f . . . . 
+. . . . f c 1 c 1 c c f . . . . 
+. . . . f c 1 c 1 c c f . . . . 
+. . . . f c c c c c c f . . . . 
+. . . . f c c c c c c f . . . . 
+. . . . . f c c c c c 8 f . . . 
+. . . . f 2 c c c c c 8 8 f . . 
+. . . f 2 2 c c c c c 8 8 f . . 
+. . . f 2 c c c c 1 1 f f . . . 
+. . . . f 3 3 c c 9 1 1 1 . . . 
+. . . . f 3 3 f f 9 9 9 f . . . 
+. . . . f 3 3 f . . . . . . . . 
+`];
         }
         return null;
     })
