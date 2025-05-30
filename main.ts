@@ -260,7 +260,6 @@ function RunLevel (Level: number) {
             `)
         tiles.setCurrentTilemap(tilemap`level`)
     }
-    tiles.placeOnRandomTile(Marcus, assets.tile`transparency16`)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -273,6 +272,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, lo
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Marcus.vy == 0) {
         Marcus.vy = -160
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
+    if (sprite.tileKindAt(TileDirection.Bottom, assets.tile`myTile2`)) {
+        tiles.setCurrentTilemap(tilemap`level3`)
+        tiles.placeOnTile(Marcus, tiles.getTileLocation(3, 0))
     }
 })
 function Player_Spawn () {
