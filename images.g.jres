@@ -1,4 +1,9 @@
 {
+    "image1": {
+        "data": "hwQPAA8AAAAAAAAAAAAAAAAiIgAgIgIAIAAAAAAAIAAgAAIAAAIgACAgAAAAICAAIAAAIAAAIAAAAAAgAAAAAAAAICIiAAAAAAAAIAAAAAAgAAAgAAAgACAgAAAAICAAIAACAAACIAAgAAAAAAAgAAAiIgAgIgIAAAAAAAAAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
