@@ -1081,8 +1081,8 @@ Marcus = sprites.create(img`
 controller.moveSprite(Marcus, 100, 0)
 Marcus.ay = 350
 scene.cameraFollowSprite(Marcus)
-Level = 3
-Reverse = 3
+Level = 1
+Reverse = 0
 RunLevel(Level)
 Runlevel2(Reverse)
 game.splash("The coins dont matter.")
