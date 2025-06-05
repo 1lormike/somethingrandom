@@ -3,14 +3,19 @@ namespace SpriteKind {
 }
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
     if (Reverse > 0) {
+        if (Reverse == 3) {
+            game.setGameOverMessage(true, "Its finally over.")
+            game.gameOver(true)
+        }
         Reverse += 1
         Runlevel2(Reverse)
+    } else if (Level == 3) {
+        game.setGameOverMessage(false, "You Win!")
+        game.setGameOverEffect(false, effects.confetti)
+        game.setGameOverPlayable(false, music.melodyPlayable(music.baDing), false)
+        game.gameOver(false)
     } else {
-        if (Level == 3) {
-            game.gameOver(true)
-        } else if (Level != 3) {
-            Level += 1
-        }
+        Level += 1
         RunLevel(Level)
     }
 })
@@ -512,11 +517,14 @@ function Enemy_Spawn () {
             tiles.placeOnTile(Lazer, value)
             tiles.setTileAt(value, assets.tile`transparency16`)
         }
+        if (Reverse > 0) {
+            Lazer.follow(Marcus, info.score() / 5 + 75)
+        }
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Marcus.vy == 0) {
-        Marcus.vy = -160
+        Marcus.vy = -140
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
@@ -648,7 +656,7 @@ function Runlevel2 (Reverse: number) {
             6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
             6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
             `)
-        scroller.setLayerImage(scroller.BackgroundLayer.Layer1, img`
+        scroller.setLayerImage(scroller.BackgroundLayer.Layer4, img`
             aaaaaaaaafffffffff..............................................................................................................fffffffffaaaaaaaaa..............
             aaaaaaaaafffffffff..............................................................................................................fffffffffaaaaaaaaa..............
             aaaaaaaaafffffffff..............................................................................................................fffffffffaaaaaaaaa..............
@@ -894,7 +902,7 @@ function Runlevel2 (Reverse: number) {
             6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
             6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
             `)
-        scroller.setLayerImage(scroller.BackgroundLayer.Layer1, img`
+        scroller.setLayerImage(scroller.BackgroundLayer.Layer4, img`
             aaaaaaaaafffffffff..............................................................................................................fffffffffaaaaaaaaa..............
             aaaaaaaaafffffffff..............................................................................................................fffffffffaaaaaaaaa..............
             aaaaaaaaafffffffff..............................................................................................................fffffffffaaaaaaaaa..............
@@ -1027,7 +1035,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, f
     Reverse = 1
     Runlevel2(Reverse)
     scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.BothDirections, scroller.BackgroundLayer.Layer0)
-    scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.OnlyVertical, scroller.BackgroundLayer.Layer1)
+    scroller.scrollBackgroundWithCamera(scroller.CameraScrollMode.OnlyVertical, scroller.BackgroundLayer.Layer4)
+    game.splash("I dont feel to good.")
 })
 function Player_Spawn () {
     for (let value3 of tiles.getTilesByType(assets.tile`myTile3`)) {
@@ -1081,7 +1090,7 @@ Marcus = sprites.create(img`
 controller.moveSprite(Marcus, 100, 0)
 Marcus.ay = 350
 scene.cameraFollowSprite(Marcus)
-Level = 1
+Level = 3
 Reverse = 0
 RunLevel(Level)
 Runlevel2(Reverse)
