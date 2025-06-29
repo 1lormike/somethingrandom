@@ -524,7 +524,7 @@ function Enemy_Spawn () {
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Marcus.vy == 0) {
-        Marcus.vy = -140
+        Marcus.vy = -160
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile7`, function (sprite, location) {
@@ -1090,7 +1090,7 @@ Marcus = sprites.create(img`
 controller.moveSprite(Marcus, 100, 0)
 Marcus.ay = 350
 scene.cameraFollowSprite(Marcus)
-Level = 3
+Level = 1
 Reverse = 0
 RunLevel(Level)
 Runlevel2(Reverse)
@@ -1126,7 +1126,7 @@ forever(function () {
 forever(function () {
     if (Marcus.isHittingTile(CollisionDirection.Left) || Marcus.isHittingTile(CollisionDirection.Right)) {
         if (controller.A.isPressed()) {
-            Marcus.vy = -80
+            Marcus.vy = -100
         }
     }
 })
